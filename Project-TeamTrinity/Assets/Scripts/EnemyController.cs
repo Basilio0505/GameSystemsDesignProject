@@ -21,7 +21,7 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         //If enemy has reached waypoint
-        if (Vector3.Distance(myAgent.destination, transform.position) <= 1)
+        if (Vector3.Distance(myAgent.destination, transform.position) <= 2)
         {
             //current waypoint updated to next one
             currentWaypoint++;
