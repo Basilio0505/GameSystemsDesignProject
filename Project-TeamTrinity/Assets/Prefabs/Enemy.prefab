@@ -106,7 +106,6 @@ GameObject:
   - component: {fileID: 3444146589728519947}
   - component: {fileID: 3444146589728519951}
   - component: {fileID: 3444146589728519950}
-  - component: {fileID: 790139586600742246}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -201,11 +200,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8dab5838dc87d469774d224c886237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: 0
   waypoints:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  patrolSpeed: 3
+  chaseSpeed: 5
+  player: {fileID: 0}
+  searchWait: 10
 --- !u!195 &3444146589728519950
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -228,16 +232,3 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!65 &790139586600742246
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3444146589728519944}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 5.5256314, y: 2, z: 7.105848}
-  m_Center: {x: -0.0335851, y: 0, z: 2.3860078}
