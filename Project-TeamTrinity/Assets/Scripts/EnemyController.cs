@@ -71,7 +71,6 @@ public class EnemyController : MonoBehaviour
 
     void Patrol()
     {
-        Debug.Log("PATROL");
         myAgent.speed = patrolSpeed;
         //If enemy has reached waypoint
         if (Vector3.Distance(myAgent.destination, transform.position) <= 2)
@@ -91,7 +90,6 @@ public class EnemyController : MonoBehaviour
 
     void Chase()
     {
-        Debug.Log("CHASE");
         myAgent.speed = chaseSpeed;
         myAgent.SetDestination(player.transform.position);
         if (Vector3.Distance(player.transform.position, transform.position) > 10)
@@ -103,7 +101,6 @@ public class EnemyController : MonoBehaviour
 
     void Search()
     {
-        Debug.Log("SEARCH");
         timer += Time.deltaTime;
         myAgent.SetDestination(this.transform.position);
         transform.LookAt(searchSpot);
@@ -137,7 +134,6 @@ public class EnemyController : MonoBehaviour
         {
             if (hit.collider.gameObject.tag == "Player")
             {
-                Debug.Log("DETECTED!");
                 player = hit.collider.gameObject;
                 state = EnemyController.State.CHASE;
             }
@@ -147,7 +143,6 @@ public class EnemyController : MonoBehaviour
         {
             if (hit.collider.gameObject.tag == "Player")
             {
-                Debug.Log("DETECTED!");
                 player = hit.collider.gameObject;
                 state = EnemyController.State.CHASE;
             }
@@ -157,7 +152,6 @@ public class EnemyController : MonoBehaviour
         {
             if (hit.collider.gameObject.tag == "Player")
             {
-                Debug.Log("DETECTED!");
                 player = hit.collider.gameObject;
                 state = EnemyController.State.CHASE;
             }
