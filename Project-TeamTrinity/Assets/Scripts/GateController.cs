@@ -6,6 +6,7 @@ public class GateController : MonoBehaviour
 {
     public GameObject Gate1;
     public GameObject Gate2;
+    public GameObject OpenGateText;
     private bool isOpening;
 
     // Start is called before the first frame update
@@ -17,7 +18,6 @@ public class GateController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(Gate1.transform.position.y);
         if (Gate1.transform.position.y > 10f)
         {
             isOpening = false;
@@ -34,6 +34,14 @@ public class GateController : MonoBehaviour
         isOpening = true;
     }*/
 
+    public void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Player")
+        {
+            OpenGateText.SetActive(true);
+        }
+    }
+
     public void OnTriggerStay(Collider other)
     {
         if(other.tag == "Player")
@@ -42,6 +50,14 @@ public class GateController : MonoBehaviour
             {
                 isOpening = true;
             }
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            OpenGateText.SetActive(false);
         }
     }
 }
