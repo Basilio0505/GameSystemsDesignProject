@@ -15,7 +15,7 @@ public class EnemyController : MonoBehaviour
         SEARCH
     }
     public State state;
-    private bool alive;
+    private bool gameOver;
 
     public GameObject[] waypoints;
     private int currentWaypoint;
@@ -42,7 +42,7 @@ public class EnemyController : MonoBehaviour
         myAgent.updateRotation = true;
 
         state = EnemyController.State.PATROL;
-        alive = true;
+        gameOver = false;
 
         heightMultiplyer = 0.8f;
 
@@ -51,7 +51,7 @@ public class EnemyController : MonoBehaviour
 
     IEnumerator EnemyStates()
     {
-        while (alive)
+        while (!gameOver)
         {
             switch (state)
             {
@@ -129,32 +129,43 @@ public class EnemyController : MonoBehaviour
         Debug.DrawRay(transform.position + Vector3.up * heightMultiplyer, (transform.forward + transform.right).normalized * sightDistance, Color.green);
         Debug.DrawRay(transform.position + Vector3.up * heightMultiplyer, (transform.forward - transform.right).normalized * sightDistance, Color.green);
 
-        //Raycsat Straight ahead
-        if (Physics.Raycast(transform.position + Vector3.up * heightMultiplyer, transform.forward, out hit, sightDistance))
+        if (!gameOver)
         {
-            if (hit.collider.gameObject.tag == "Player")
+            //Raycsat Straight ahead
+            if (Physics.Raycast(transform.position + Vector3.up * heightMultiplyer, transform.forward, out hit, sightDistance))
             {
-                player = hit.collider.gameObject;
-                state = EnemyController.State.CHASE;
+                if (hit.collider.gameObject.tag == "Player")
+                {
+                    player = hit.collider.gameObject;
+                    state = EnemyController.State.CHASE;
+                }
+            }
+            //Raycast right edge of sight cone
+            if (Physics.Raycast(transform.position + Vector3.up * heightMultiplyer, (transform.forward + transform.right).normalized, out hit, sightDistance))
+            {
+                if (hit.collider.gameObject.tag == "Player")
+                {
+                    player = hit.collider.gameObject;
+                    state = EnemyController.State.CHASE;
+                }
+            }
+            //Raycast left edge of sight cone
+            if (Physics.Raycast(transform.position + Vector3.up * heightMultiplyer, (transform.forward - transform.right).normalized, out hit, sightDistance))
+            {
+                if (hit.collider.gameObject.tag == "Player")
+                {
+                    player = hit.collider.gameObject;
+                    state = EnemyController.State.CHASE;
+                }
             }
         }
-        //Raycast right edge of sight cone
-        if (Physics.Raycast(transform.position + Vector3.up * heightMultiplyer, (transform.forward + transform.right).normalized, out hit, sightDistance))
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Player")
         {
-            if (hit.collider.gameObject.tag == "Player")
-            {
-                player = hit.collider.gameObject;
-                state = EnemyController.State.CHASE;
-            }
-        }
-        //Raycast left edge of sight cone
-        if (Physics.Raycast(transform.position + Vector3.up * heightMultiplyer, (transform.forward - transform.right).normalized, out hit, sightDistance))
-        {
-            if (hit.collider.gameObject.tag == "Player")
-            {
-                player = hit.collider.gameObject;
-                state = EnemyController.State.CHASE;
-            }
+            gameOver = true;
         }
     }
 }

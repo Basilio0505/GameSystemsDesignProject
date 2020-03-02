@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5474536779595174777}
   - component: {fileID: 5474536779597720057}
   - component: {fileID: 7008079502957135458}
+  - component: {fileID: 425820158}
   m_Layer: 0
   m_Name: FPSController
   m_TagString: Player
@@ -303,6 +304,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 1.8182157, z: 2}
   m_Center: {x: 0, y: 0.29776877, z: 0}
+--- !u!114 &425820158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5474536779598475289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c46a9d3ed467b4d45939b9938c2bcd1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameOverScreen: {fileID: 0}
+  controller: {fileID: 5474536779592451577}
 --- !u!1 &5474536779598475291
 GameObject:
   m_ObjectHideFlags: 0
