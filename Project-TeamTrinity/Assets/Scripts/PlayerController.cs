@@ -16,7 +16,10 @@ public class PlayerController : MonoBehaviour
 
     public bool facingDistract;
     public GameObject PickUpItemText;
-    public GameObject DistractionItem;
+    private GameObject DistractionItem;
+    public GameObject slot1;
+    public GameObject slot2;
+    public GameObject slot3;
     public int inventory;
 
     // Start is called before the first frame update
