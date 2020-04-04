@@ -14,18 +14,36 @@ public class PlayerController : MonoBehaviour
 
     public bool isCrouching = false;
 
+    public bool facingDistract;
+    public GameObject PickUpItemText;
+    public GameObject DistractionItem;
+    public int inventory;
+
     // Start is called before the first frame update
     void Start()
     {
         crouchAdjust = new Vector3(0, 0.5f, 0);
+        inventory = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (facingDistract)
+        {   
+            if(inventory >= 3)
+            {
+
+            }
+            else if (Input.GetKeyDown("e"))
+            {
+                
+            }
+        }
+
         if (Input.GetKeyDown("left ctrl"))
         {
-            Debug.Log("CROUCHING");
+            //Debug.Log("CROUCHING");
             isCrouching = true;
             cameraTransform.position -= crouchAdjust;
             colliderTransform.position -= crouchAdjust;
@@ -33,7 +51,7 @@ public class PlayerController : MonoBehaviour
         }
         else if(isCrouching == true && Input.GetKeyUp("left ctrl"))
         {
-            Debug.Log("NOT CROUCHING");
+            //Debug.Log("NOT CROUCHING");
             isCrouching = false;
             cameraTransform.position += crouchAdjust;
             colliderTransform.position += crouchAdjust;
@@ -51,6 +69,22 @@ public class PlayerController : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             controller.enabled = false;
+        }
+
+        if (other.tag == "Distract")
+        {
+            DistractionItem = other.gameObject;
+            PickUpItemText.SetActive(true);
+            facingDistract = true;
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if(other.tag == "Distract")
+        {
+            PickUpItemText.SetActive(false);
+            facingDistract = false;
         }
     }
 

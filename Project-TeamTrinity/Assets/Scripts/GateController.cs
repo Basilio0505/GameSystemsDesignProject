@@ -7,17 +7,27 @@ public class GateController : MonoBehaviour
     public GameObject Gate1;
     public GameObject Gate2;
     public GameObject OpenGateText;
+    private bool facingButton;
     private bool isOpening;
 
     // Start is called before the first frame update
     void Start()
     {
         isOpening = false;
+        facingButton = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (facingButton)
+        {
+            if (Input.GetKeyDown("e"))
+            {
+                isOpening = true;
+            }
+        }
+
         if (Gate1.transform.position.y > 10f)
         {
             isOpening = false;
@@ -29,27 +39,12 @@ public class GateController : MonoBehaviour
         }
     }
 
-    /*private void OnMouseDown()
-    {
-        isOpening = true;
-    }*/
-
     public void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
         {
             OpenGateText.SetActive(true);
-        }
-    }
-
-    public void OnTriggerStay(Collider other)
-    {
-        if(other.tag == "Player")
-        {
-            if (Input.GetKeyDown("e"))
-            {
-                isOpening = true;
-            }
+            facingButton = true;
         }
     }
 
@@ -58,6 +53,7 @@ public class GateController : MonoBehaviour
         if (other.tag == "Player")
         {
             OpenGateText.SetActive(false);
+            facingButton = false;
         }
     }
 }
