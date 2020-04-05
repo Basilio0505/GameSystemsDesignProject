@@ -41,7 +41,43 @@ public class PlayerController : MonoBehaviour
             }
             else if (Input.GetKeyDown("e"))
             {
-                
+                Destroy(DistractionItem);
+                PickUpItemText.SetActive(false);
+                facingDistract = false;
+
+                inventory++;
+                if(inventory == 1)
+                {
+                    slot1.SetActive(true);
+                }
+                else if (inventory == 2)
+                {
+                    slot2.SetActive(true);
+                }
+                else if (inventory == 3)
+                {
+                    slot3.SetActive(true);
+                }
+            }
+        }
+
+        if(inventory > 0)
+        {
+            if (Input.GetMouseButtonDown(1))
+            {
+                if (inventory == 1)
+                {
+                    slot1.SetActive(false);
+                }
+                else if (inventory == 2)
+                {
+                    slot2.SetActive(false);
+                }
+                else if (inventory == 3)
+                {
+                    slot3.SetActive(false);
+                }
+                inventory--;
             }
         }
 
