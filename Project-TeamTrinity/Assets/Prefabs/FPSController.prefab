@@ -320,9 +320,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameOverScreen: {fileID: 0}
   controller: {fileID: 5474536779592451577}
+  ControllerTransform: {fileID: 5474536779598048313}
   cameraTransform: {fileID: 5474536779598048315}
   colliderTransform: {fileID: 494944381926100232}
   isCrouching: 0
+  facingDistract: 0
+  PickUpItemText: {fileID: 0}
+  InvFullText: {fileID: 0}
+  slot1: {fileID: 0}
+  slot2: {fileID: 0}
+  slot3: {fileID: 0}
+  inventory: 0
+  projectile: {fileID: 2745991966118097276, guid: ca6f9b4796e7fcf40ac176182b04db11,
+    type: 3}
 --- !u!1 &5474536779598475291
 GameObject:
   m_ObjectHideFlags: 0

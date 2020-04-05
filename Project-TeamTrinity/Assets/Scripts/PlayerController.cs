@@ -8,10 +8,10 @@ public class PlayerController : MonoBehaviour
     public GameObject GameOverScreen;
     public UnityStandardAssets.Characters.FirstPerson.FirstPersonController controller;
 
+    public Transform ControllerTransform;
     public Transform cameraTransform;
     public Transform colliderTransform;
     private Vector3 crouchAdjust;
-
     public bool isCrouching = false;
 
     public bool facingDistract;
@@ -23,11 +23,16 @@ public class PlayerController : MonoBehaviour
     public GameObject slot3;
     public int inventory;
 
+    public GameObject projectile;
+    private Transform spawnTransform;
+    private Vector3 spawnPosition;
+
     // Start is called before the first frame update
     void Start()
     {
         crouchAdjust = new Vector3(0, 0.5f, 0);
         inventory = 0;
+        spawnPosition = new Vector3(0, 1f,0);
     }
 
     // Update is called once per frame
@@ -65,6 +70,8 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(1))
             {
+                ThrowDistraction();
+
                 if (inventory == 1)
                 {
                     slot1.SetActive(false);
@@ -97,6 +104,13 @@ public class PlayerController : MonoBehaviour
             colliderTransform.position += crouchAdjust;
             controller.m_WalkSpeed = 5;
         }
+    }
+
+    public void ThrowDistraction()
+    {
+        spawnPosition += ControllerTransform.position;
+        Instantiate(projectile, spawnPosition, ControllerTransform.rotation);
+        spawnPosition = new Vector3(0, 1f, 0);
     }
 
     public void OnTriggerEnter(Collider other)
