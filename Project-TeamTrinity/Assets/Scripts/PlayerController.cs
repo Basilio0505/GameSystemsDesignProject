@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
     public GameObject GameOverScreen;
     public UnityStandardAssets.Characters.FirstPerson.FirstPersonController controller;
 
-    public Transform ControllerTransform;
     public Transform cameraTransform;
     public Transform colliderTransform;
     private Vector3 crouchAdjust;
@@ -24,8 +23,8 @@ public class PlayerController : MonoBehaviour
     public int inventory;
 
     public GameObject projectile;
-    private Transform spawnTransform;
     private Vector3 spawnPosition;
+    private Quaternion spawnRotation;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +32,7 @@ public class PlayerController : MonoBehaviour
         crouchAdjust = new Vector3(0, 0.5f, 0);
         inventory = 0;
         spawnPosition = new Vector3(0, 1f,0);
+        //spawnRotation = new Quaternion(-20f, 0, 0, 0);
     }
 
     // Update is called once per frame
@@ -108,8 +108,10 @@ public class PlayerController : MonoBehaviour
 
     public void ThrowDistraction()
     {
-        spawnPosition += ControllerTransform.position;
-        Instantiate(projectile, spawnPosition, ControllerTransform.rotation);
+        spawnPosition += transform.position;
+        GameObject clone = Instantiate(projectile, spawnPosition, cameraTransform.rotation);//new Quaternion(cameraTransform.rotation.x + -60, cameraTransform.rotation.y, cameraTransform.rotation.z, cameraTransform.rotation.w));
+        Rigidbody cloneR = clone.GetComponent<Rigidbody>();
+        cloneR.velocity = cameraTransform.TransformDirection(Vector3.forward * 14);
         spawnPosition = new Vector3(0, 1f, 0);
     }
 
