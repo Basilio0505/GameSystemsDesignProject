@@ -111,8 +111,10 @@ public class PlayerController : MonoBehaviour
         spawnPosition += transform.position;
         GameObject clone = Instantiate(projectile, spawnPosition, cameraTransform.rotation);//new Quaternion(cameraTransform.rotation.x + -60, cameraTransform.rotation.y, cameraTransform.rotation.z, cameraTransform.rotation.w));
         Rigidbody cloneR = clone.GetComponent<Rigidbody>();
-        cloneR.velocity = cameraTransform.TransformDirection(Vector3.forward * 14);
         spawnPosition = new Vector3(0, 1f, 0);
+
+        cloneR.velocity = cameraTransform.TransformDirection(Vector3.forward * 14);
+        clone.GetComponent<DistractController>().startCount = true;
     }
 
     public void OnTriggerEnter(Collider other)
