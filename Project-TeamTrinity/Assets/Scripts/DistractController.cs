@@ -4,27 +4,30 @@ using UnityEngine;
 
 public class DistractController : MonoBehaviour
 {
-    public bool startCount;
-    public float timer = 5f;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
+    private float timer = 4f;
+    public GameObject enemy;
 
     // Update is called once per frame
     void Update()
     {
-        if (startCount)
-        {
-            timer -= Time.deltaTime;
-            Debug.Log(timer);
+        timer -= Time.deltaTime;
 
-            if(timer <= 0f)
+        if(timer <= 0f)
+        {
+            Debug.Log("DESTROY");
+            if(enemy != null)
             {
-                Debug.Log("DESTROY");
-                Destroy(gameObject);
+                enemy.GetComponent<EnemyController>().searchSpot = transform.position;
             }
+            Destroy(gameObject);
+        }
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Enemy")
+        {
+            enemy = other.gameObject;
         }
     }
 }

@@ -13,10 +13,11 @@ GameObject:
   - component: {fileID: 2745991966118097217}
   - component: {fileID: 2745991966118097222}
   - component: {fileID: 2745991966118097223}
+  - component: {fileID: 705479644497359060}
   - component: {fileID: 4230349835912904845}
   m_Layer: 0
-  m_Name: Distract
-  m_TagString: Distract
+  m_Name: DistractProjectile
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,6 +111,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &705479644497359060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2745991966118097276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7bceba47b5d32e4a999f68cfa88a362, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &4230349835912904845
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -121,5 +134,5 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 5
+  m_Radius: 20
   m_Center: {x: 0, y: 0, z: 0}

@@ -24,7 +24,7 @@ public class EnemyController : MonoBehaviour
     public float chaseSpeed = 5f;
     public GameObject player;
 
-    private Vector3 searchSpot;
+    public Vector3 searchSpot;
     private float timer;
     public float searchWait = 10;
 
@@ -91,10 +91,24 @@ public class EnemyController : MonoBehaviour
     void Chase()
     {
         myAgent.speed = chaseSpeed;
-        myAgent.SetDestination(player.transform.position);
-        if (Vector3.Distance(player.transform.position, transform.position) > 10)
+
+        if (player != null)
         {
+            Debug.Log("ENEMY: CHASING");
+
             searchSpot = player.transform.position;
+            myAgent.SetDestination(searchSpot);
+
+            if (Vector3.Distance(player.transform.position, transform.position) > 10)
+            {
+                Debug.Log("ENEMY: GOING INTO SEARCH - OUT OF RANGE");
+                searchSpot = player.transform.position;
+                state = EnemyController.State.SEARCH;
+            }
+        }
+        else if(player == null)
+        {
+            Debug.Log("ENEMY: GOING INTO SEARCH - OBJECT NULL");
             state = EnemyController.State.SEARCH;
         }
     }
@@ -139,6 +153,11 @@ public class EnemyController : MonoBehaviour
                     player = hit.collider.gameObject;
                     state = EnemyController.State.CHASE;
                 }
+                if (hit.collider.gameObject.tag == "Projectile")
+                {
+                    player = hit.collider.gameObject;
+                    state = EnemyController.State.CHASE;
+                }
             }
             //Raycast right edge of sight cone
             if (Physics.Raycast(transform.position + Vector3.up * heightMultiplyer, (transform.forward + transform.right).normalized, out hit, sightDistance))
@@ -148,11 +167,21 @@ public class EnemyController : MonoBehaviour
                     player = hit.collider.gameObject;
                     state = EnemyController.State.CHASE;
                 }
+                if (hit.collider.gameObject.tag == "Projectile")
+                {
+                    player = hit.collider.gameObject;
+                    state = EnemyController.State.CHASE;
+                }
             }
             //Raycast left edge of sight cone
             if (Physics.Raycast(transform.position + Vector3.up * heightMultiplyer, (transform.forward - transform.right).normalized, out hit, sightDistance))
             {
                 if (hit.collider.gameObject.tag == "Player")
+                {
+                    player = hit.collider.gameObject;
+                    state = EnemyController.State.CHASE;
+                }
+                if (hit.collider.gameObject.tag == "Projectile")
                 {
                     player = hit.collider.gameObject;
                     state = EnemyController.State.CHASE;

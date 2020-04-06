@@ -16262,7 +16262,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1518166830
 Transform:
   m_ObjectHideFlags: 0
@@ -17944,7 +17944,7 @@ PrefabInstance:
     - target: {fileID: 425820158, guid: 46290fbbc81f8a441ab9cb95130202d2, type: 3}
       propertyPath: projectile
       value: 
-      objectReference: {fileID: 2745991966118097276, guid: ca6f9b4796e7fcf40ac176182b04db11,
+      objectReference: {fileID: 2745991966118097276, guid: a8d5ed82d008cab49aa94cb94b64c2c3,
         type: 3}
     - target: {fileID: 5474536779598048313, guid: 46290fbbc81f8a441ab9cb95130202d2,
         type: 3}
