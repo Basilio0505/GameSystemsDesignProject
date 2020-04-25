@@ -26,6 +26,9 @@ public class PlayerController : MonoBehaviour
     private Vector3 spawnPosition;
     private Quaternion spawnRotation;
 
+    private Vector3 savePos;
+    public bool IsSave = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -126,6 +129,11 @@ public class PlayerController : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             controller.enabled = false;
+            if (IsSave = true)
+            {
+                transform.position = savePos;
+                GetComponent<Rigidbody>().velocity = Vector3.zero;
+            }
         }
 
         if (other.tag == "Distract")
@@ -133,6 +141,13 @@ public class PlayerController : MonoBehaviour
             DistractionItem = other.gameObject;
             PickUpItemText.SetActive(true);
             facingDistract = true;
+        }
+
+        if (other.tag == "Savepoint")
+        {
+            GameObject.FindGameObjectWithTag("LevelManager").GetComponent<levelManager>().ClearSavepoints();
+            other.GetComponent<MeshRenderer>().material.color = Color.green;
+            savePos = other.transform.position + Vector3.up;
         }
     }
 
@@ -149,5 +164,10 @@ public class PlayerController : MonoBehaviour
     public void Restart()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void LastSave()
+    {
+        IsSave = true;
     }
 }
