@@ -129,7 +129,7 @@ public class PlayerController : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             controller.enabled = false;
-            if (IsSave = true)
+            if (IsSave == true)
             {
                 transform.position = savePos;
                 GetComponent<Rigidbody>().velocity = Vector3.zero;
