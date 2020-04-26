@@ -3854,8 +3854,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac58b3cf503b532448c1adcfbc70a0ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Gate1: {fileID: 1620578212}
-  Gate2: {fileID: 1527788678}
+  gates:
+  - {fileID: 1620578212}
+  - {fileID: 1527788678}
   OpenGateText: {fileID: 65816282}
 --- !u!65 &193935108
 BoxCollider:

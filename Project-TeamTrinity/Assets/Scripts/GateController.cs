@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class GateController : MonoBehaviour
 {
-    public GameObject Gate1;
-    public GameObject Gate2;
+    public GameObject[] gates;
     public GameObject OpenGateText;
     private bool facingButton;
     private bool isOpening;
@@ -28,14 +27,16 @@ public class GateController : MonoBehaviour
             }
         }
 
-        if (Gate1.transform.position.y > 10f)
+        if (gates[0].transform.position.y > 10f)
         {
             isOpening = false;
         }
         if (isOpening)
         {
-            Gate1.transform.Translate(Vector3.up * Time.deltaTime * 5);
-            Gate2.transform.Translate(Vector3.up * Time.deltaTime * 5);
+            for (int i = 0; i<gates.Length; i++)
+            {
+                gates[i].transform.Translate(Vector3.up * Time.deltaTime * 5);
+            }
         }
     }
 
