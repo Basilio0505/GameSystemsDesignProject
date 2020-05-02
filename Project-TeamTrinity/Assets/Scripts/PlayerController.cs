@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     public GameObject GameOverScreen;
+    public GameObject YouWinScreen;
     public UnityStandardAssets.Characters.FirstPerson.FirstPersonController controller;
 
     public Transform cameraTransform;
@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour
     public GameObject projectile;
     private Vector3 spawnPosition;
     private Quaternion spawnRotation;
+
+    public bool TrophyStolen = false;
 
     private Vector3 savePos;
     public bool IsSave = false;
@@ -143,6 +145,20 @@ public class PlayerController : MonoBehaviour
             facingDistract = true;
         }
 
+        if (other.tag == "Trophy")
+        {
+            Destroy(other.gameObject);
+            TrophyStolen = true;
+        }
+
+        if(other.tag == "Escape" && TrophyStolen == true)
+        {
+            YouWinScreen.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            controller.enabled = false;
+        }
+
         if (other.tag == "Savepoint")
         {
             GameObject.FindGameObjectWithTag("LevelManager").GetComponent<levelManager>().ClearSavepoints();
@@ -159,11 +175,6 @@ public class PlayerController : MonoBehaviour
             InvFullText.SetActive(false);
             facingDistract = false;
         }
-    }
-
-    public void Restart()
-    {
-        SceneManager.LoadScene(0);
     }
 
     public void LastSave()

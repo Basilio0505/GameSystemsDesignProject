@@ -10,6 +10,7 @@ TagManager:
   - Savepoint
   - LevelManager
   - Trophy
+  - Escape
   layers:
   - Default
   - TransparentFX
