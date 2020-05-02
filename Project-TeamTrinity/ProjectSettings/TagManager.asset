@@ -9,6 +9,7 @@ TagManager:
   - Projectile
   - Savepoint
   - LevelManager
+  - Trophy
   layers:
   - Default
   - TransparentFX
