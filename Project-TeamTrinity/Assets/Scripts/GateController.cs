@@ -12,6 +12,8 @@ public class GateController : MonoBehaviour
     public levelManager manager;
     public GameObject checkpoint;
 
+    public GameObject newEnemy;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,7 @@ public class GateController : MonoBehaviour
             {
                 isOpening = true;
                 manager.SetCheckpoint(checkpoint);
+                newEnemy.SetActive(true);
             }
         }
 

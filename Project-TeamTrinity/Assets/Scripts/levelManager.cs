@@ -9,7 +9,6 @@ public class levelManager : MonoBehaviour
     public PlayerController player;
 
     public GameObject checkpoint0;
-
     public GameObject currentCheckpoint;
 
     void Start()
@@ -25,6 +24,7 @@ public class levelManager : MonoBehaviour
     //    }
     //}
 
+    //Used to set new checkpoint on each gate button press
     public void SetCheckpoint(GameObject checkpoint)
     {
         currentCheckpoint = checkpoint;
@@ -33,11 +33,7 @@ public class levelManager : MonoBehaviour
     public void WarpToCheckpoint()
     {
         Vector3 coords = new Vector3(currentCheckpoint.transform.position.x, currentCheckpoint.transform.position.y, currentCheckpoint.transform.position.z);
-        Debug.Log("WARP");
-        Debug.Log("CHECK" + currentCheckpoint.transform.position);
-        Debug.Log("PLAYER" + player.transform.position);
         player.movePlayer(coords);
-        //player.transform.position = new Vector3(currentCheckpoint.transform.position.x, currentCheckpoint.transform.position.y, currentCheckpoint.transform.position.z);
     }
 
     public void Restart()
