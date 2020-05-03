@@ -16,6 +16,7 @@ public class EnemyController : MonoBehaviour
     }
     public State state;
     private bool gameOver;
+    private float gameOverTimer = 3f;
 
     public GameObject[] waypoints;
     private int currentWaypoint;
@@ -49,9 +50,24 @@ public class EnemyController : MonoBehaviour
         StartCoroutine("EnemyStates");
     }
 
+    void Update()
+    {
+        if (gameOver)
+        {
+            if (gameOverTimer > 0f)
+            {
+                gameOverTimer -= Time.deltaTime;
+            }
+            else
+            {
+                gameOver = false;
+            }
+        }
+    }
+
     IEnumerator EnemyStates()
     {
-        while (!gameOver)
+        while (true)
         {
             switch (state)
             {
@@ -194,6 +210,7 @@ public class EnemyController : MonoBehaviour
     {
         if(other.tag == "Player")
         {
+            state = EnemyController.State.PATROL;
             gameOver = true;
         }
     }
