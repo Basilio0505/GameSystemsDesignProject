@@ -28,8 +28,8 @@ public class PlayerController : MonoBehaviour
 
     public bool TrophyStolen = false;
 
-    private Vector3 savePos;
-    public bool IsSave = false;
+    //private Vector3 savePos;
+    //public bool IsSave = false;
 
     // Start is called before the first frame update
     void Start()
@@ -126,16 +126,14 @@ public class PlayerController : MonoBehaviour
         if (other.tag == "Enemy")
         {
             GameOverScreen.SetActive(true);
-            //controller.m_MouseLook.clampVerticalRotation = false;
-            //controller.m_MouseLook.lockCursor = false;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             controller.enabled = false;
-            if (IsSave == true)
-            {
-                transform.position = savePos;
-                GetComponent<Rigidbody>().velocity = Vector3.zero;
-            }
+            //if (IsSave == true)
+            //{
+            //    transform.position = savePos;
+            //    GetComponent<Rigidbody>().velocity = Vector3.zero;
+            //}
         }
 
         if (other.tag == "Distract")
@@ -159,12 +157,12 @@ public class PlayerController : MonoBehaviour
             controller.enabled = false;
         }
 
-        if (other.tag == "Savepoint")
-        {
-            GameObject.FindGameObjectWithTag("LevelManager").GetComponent<levelManager>().ClearSavepoints();
-            other.GetComponent<MeshRenderer>().material.color = Color.green;
-            savePos = other.transform.position + Vector3.up;
-        }
+        //if (other.tag == "Savepoint")
+        //{
+        //    GameObject.FindGameObjectWithTag("LevelManager").GetComponent<levelManager>().ClearSavepoints();
+        //    other.GetComponent<MeshRenderer>().material.color = Color.green;
+        //    savePos = other.transform.position + Vector3.up;
+        //}
     }
 
     public void OnTriggerExit(Collider other)
@@ -177,8 +175,25 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void LastSave()
+    public void movePlayer(Vector3 currentCheckpoint)
     {
-        IsSave = true;
+        controller.m_MoveDir = currentCheckpoint;
+        controller.desiredMove = currentCheckpoint;
+        //controller.enabled = false;
+        transform.position = currentCheckpoint;
+        //controller.enabled = true;
     }
+
+    public void ActivateMouse()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        controller.enabled = true;
+        GameOverScreen.SetActive(false);
+    }
+
+    //public void LastSave()
+    //{
+    //    IsSave = true;
+    //}
 }

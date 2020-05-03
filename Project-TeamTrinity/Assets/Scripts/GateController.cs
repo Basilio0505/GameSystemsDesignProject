@@ -9,6 +9,9 @@ public class GateController : MonoBehaviour
     private bool facingButton;
     private bool isOpening;
 
+    public levelManager manager;
+    public GameObject checkpoint;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +27,7 @@ public class GateController : MonoBehaviour
             if (Input.GetKeyDown("e"))
             {
                 isOpening = true;
+                manager.SetCheckpoint(checkpoint);
             }
         }
 
