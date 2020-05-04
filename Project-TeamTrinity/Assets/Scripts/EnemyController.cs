@@ -22,7 +22,7 @@ public class EnemyController : MonoBehaviour
     private int currentWaypoint;
     public float patrolSpeed = 3f;
 
-    public float chaseSpeed = 5f;
+    public float chaseSpeed = 6f;
     public GameObject player;
 
     public Vector3 searchSpot;

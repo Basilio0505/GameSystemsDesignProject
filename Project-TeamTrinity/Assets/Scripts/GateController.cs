@@ -31,6 +31,7 @@ public class GateController : MonoBehaviour
                 isOpening = true;
                 manager.SetCheckpoint(checkpoint);
                 newEnemy.SetActive(true);
+                manager.NewObjective();
             }
         }
 
