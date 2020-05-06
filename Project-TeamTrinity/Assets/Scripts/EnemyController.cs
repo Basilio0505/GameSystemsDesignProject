@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class EnemyController : MonoBehaviour
 {
     private NavMeshAgent myAgent;
-    //public Animator anim;
+    public Animator anim;
 
     public enum State
     {
@@ -87,6 +87,7 @@ public class EnemyController : MonoBehaviour
 
     void Patrol()
     {
+        anim.SetTrigger("Walk");
         myAgent.speed = patrolSpeed;
         //If enemy has reached waypoint
         if (Vector3.Distance(myAgent.destination, transform.position) <= 2)
@@ -106,6 +107,8 @@ public class EnemyController : MonoBehaviour
 
     void Chase()
     {
+        //anim.SetTrigger("Walk");
+        anim.SetTrigger("Run");
         myAgent.speed = chaseSpeed;
 
         if (player != null)
@@ -131,24 +134,16 @@ public class EnemyController : MonoBehaviour
 
     void Search()
     {
+        anim.SetTrigger("Look");
         timer += Time.deltaTime;
         myAgent.SetDestination(this.transform.position);
-        transform.LookAt(searchSpot);
+        //transform.LookAt(searchSpot);
         if(timer >= searchWait)
         {
             state = EnemyController.State.PATROL;
             timer = 0;
         }
     }
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.tag == "Player")
-    //    {
-    //        state = EnemyController.State.CHASE;
-    //        player = other.gameObject;
-    //    }
-    //}
 
     void FixedUpdate()
     {
